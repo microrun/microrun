@@ -2,7 +2,8 @@ header:
   version: 14
 
 machine: qemuarm64
-distro: poky
+distro: microrun
+target: minimal-init-image
 
 repos:
   meta-custom:
