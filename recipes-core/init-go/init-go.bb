@@ -7,7 +7,7 @@ GO_IMPORT = "github.com/microrun/microrun/userspace/init"
 SRC_URI = "git://github.com/microrun/microrun.git;protocol=https;branch=main"
 SRCREV = "${AUTOREV}"
 
-inherit go
+inherit go-static
 
 do_install() {
     install -d ${D}${base_sbindir}
