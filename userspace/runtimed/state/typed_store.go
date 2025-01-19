@@ -79,12 +79,15 @@ func (t *TypedStore[T]) Create(ctx context.Context, name string, spec T) error {
 // Update updates an existing resource
 func (t *TypedStore[T]) Update(ctx context.Context, name string, spec T) error {
 	kind := pb.KindFor[T]()
-	resource := &pb.Resource{
-		Metadata: &pb.ResourceMetadata{
-			Kind: kind,
-			Name: name,
-		},
+	
+	// First get the existing resource to preserve fields
+	existing, err := t.store.Get(ctx, kind, name)
+	if err != nil {
+		return err
 	}
+
+	// Create new resource preserving metadata but updating spec
+	resource := proto.Clone(existing).(*pb.Resource)
 	if err := pb.SetSpec(resource, spec); err != nil {
 		return err
 	}
