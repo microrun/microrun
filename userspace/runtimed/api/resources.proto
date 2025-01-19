@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package runtimed;
+
+option go_package = "github.com/microrun/microrun/userspace/runtimed/api";
+
+// ResourceMetadata contains common metadata for all resources
+message ResourceMetadata {
+  string name = 1;
+  string kind = 2;
+  string owner = 3;
+  int64 generation = 4;
+  repeated string finalizers = 5;
+  map<string, string> labels = 6;
+  map<string, string> annotations = 7;
+}
+
+// Resource is the top-level wrapper for all resource types
+message Resource {
+  ResourceMetadata metadata = 1;
+  oneof spec {
+    NetworkInterface network_interface = 2;
+    DHCPClient dhcp_client = 3;
+  }
+}
+
+// NetworkInterface represents a network interface resource
+message NetworkInterface {
+  string interface_name = 1;
+  string mac_address = 2;
+  repeated string ip_addresses = 3;
+}
+
+// DHCPClient represents a DHCP client configuration
+message DHCPClient {
+  string interface_ref = 1;  // References a NetworkInterface resource
+  bool enabled = 2;
+}
