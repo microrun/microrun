@@ -6,7 +6,7 @@ inherit core-image
 # Remove package management
 IMAGE_FEATURES = ""
 PACKAGE_INSTALL = "\
-    init-go \
+    runtimed-go \
     kernel-modules \
 "
 

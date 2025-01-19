@@ -11,5 +11,5 @@ local_conf_header:
     BB_SIGNATURE_HANDLER = "OEEquivHash"
 
     INHERIT += "externalsrc"
-    EXTERNALSRC:pn-init-go = "/builder"
-    EXTERNALSRC_BUILD:pn-init-go = "/builder"
+    EXTERNALSRC:pn-runtimed-go = "/builder"
+    EXTERNALSRC_BUILD:pn-runtimed-go = "/builder"
